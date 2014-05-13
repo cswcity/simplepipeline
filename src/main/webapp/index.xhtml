@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./shepherd_tplt.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <p>Paste fasta sequences here:</p>
+                    <h:inputTextarea cols="80" rows="20" id="seq" 
+                                     value="#{MidProbeBean.seq}">
+                        
+                    </h:inputTextarea>
+                    <br />
+                    <br />
+                    <h:commandButton action="midprobe" value="Begin Analysis">
+                        
+                    </h:commandButton>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
