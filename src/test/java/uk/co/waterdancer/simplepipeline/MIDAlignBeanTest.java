@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
@@ -43,6 +44,7 @@ public class MIDAlignBeanTest {
     /**
      * Test of getSeqs method, of class MIDAlignBean.
      */
+    @Ignore
     @Test
     public void testGetSeqs() {
         System.out.println("getSeqs");
@@ -57,6 +59,7 @@ public class MIDAlignBeanTest {
     /**
      * Test of populate method, of class MIDAlignBean.
      */
+    @Ignore
     @Test
     public void testPopulate() {
         System.out.println("populate");
