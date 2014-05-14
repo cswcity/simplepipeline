@@ -13,17 +13,15 @@
             <ui:define name="content">
                 <h:form>
                     <p>Paste fasta sequences here:</p>
-                    <h:inputTextarea cols="80" rows="20" id="input" 
-                                     value="#{UploadBean.input}">
+                    <h:inputTextarea cols="80" rows="20" id="input" binding="#{input}">
                         
                     </h:inputTextarea>
                     <br />
                     <br />
                     <!--edit action for new display sequence -->
-                    <!--<h:commandButton action="uploaded" value="Upload">-->
-                    <h:link value="Continue" outcome="uploaded" />   
-                    <!--</h:commandButton>-->
-                </h:form>
+                    <h:commandButton value="Upload" action="#{UploadBean.setInput(input.value)}"></h:commandButton>
+                 </h:form>
+                <h:link value="Continue" outcome="uploaded"></h:link>
                 <!--TODO add file browser for fasta format-->
             </ui:define>
 

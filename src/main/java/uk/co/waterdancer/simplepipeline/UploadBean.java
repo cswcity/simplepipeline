@@ -10,6 +10,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.HashMap;
+import javax.faces.bean.ManagedProperty;
 
 /**
  *
@@ -19,14 +20,17 @@ import java.util.HashMap;
 @SessionScoped
 public class UploadBean implements Serializable {
     
+    @ManagedProperty(value="#{input}")
     private String input;
     private HashMap<String, String> sequences;
+    @ManagedProperty(value="#{count}")
     private int count;
     /**
      * Creates a new instance of UploadBean
      */
     public UploadBean() {
         sequences = new HashMap<>();
+        //System.out.println("Upload bean created");
     }
 
     /**
@@ -76,7 +80,7 @@ public class UploadBean implements Serializable {
         count = sequences.size();
         return count;
     }
-
+    
 
     /**
      * @return the input
@@ -89,6 +93,7 @@ public class UploadBean implements Serializable {
      * @param input the input to set
      */
     public void setInput(String input) {
+        System.out.println("Input has been recognized: " + input);
         sequences.clear();
         this.input = input;
         fill();
