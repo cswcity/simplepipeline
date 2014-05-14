@@ -35,8 +35,8 @@ public class UploadBeanTest {
     
     @Before
     public void setUp() {
-        input = ">SRR099334\n" +
-"GTGCGTTGCACTGAGACAAACCGAAGACTGACTGGGGCGCAGATGGTTGAGCTGAGGAAACTGTCACTTTGGTTCCTTTCCCCAGTAGTCAAAGTAGTATGCGTAGTTGTTCCGTCTGGCGCAGTAATACACAGCTGTGTCCTCAGTCTGCATATTCTGTCCACTCAGAGTCACGCTGCTGCTGGAAGAGTCTCTGCTAACTGTGAATCTACTTTTCAGTTTTATCGCTGTAATATGTGTTACCGCTGCCACAGATCTCCCCAACCCATTCCAGAGCTTTTCCTGCAACCTGTCGTATAAAGTCAGTGCAATAGCTGCTGTCAGTCACTGAATATCCAGAGATTTTACAGGACAGAGTCAAAAACCTGACCAGGCCTCAAGACAATAGAATCTGTCTGGGTCAGTTCAACACAGTGGACACGAGAGACAGACTGCAAGAAGCAGAAATAAGCAGA";
+        input = ">SRR099334.7\nGTGCGTTGCACTGAGACAAA\n" +
+        ">SRR099334.10\nGTGCGTTCAGAGGCCAGACATCCAATAATTT";
 
     }
     
@@ -51,10 +51,13 @@ public class UploadBeanTest {
     public void testGetSequences() {
         System.out.println("getSequences");
         UploadBean instance = new UploadBean();
+        instance.setTesting(true);
         instance.setInput(input);
-        HashMap<String, String> expResult = new HashMap();
-        expResult.put("SRR099334", 
-"GTGCGTTGCACTGAGACAAACCGAAGACTGACTGGGGCGCAGATGGTTGAGCTGAGGAAACTGTCACTTTGGTTCCTTTCCCCAGTAGTCAAAGTAGTATGCGTAGTTGTTCCGTCTGGCGCAGTAATACACAGCTGTGTCCTCAGTCTGCATATTCTGTCCACTCAGAGTCACGCTGCTGCTGGAAGAGTCTCTGCTAACTGTGAATCTACTTTTCAGTTTTATCGCTGTAATATGTGTTACCGCTGCCACAGATCTCCCCAACCCATTCCAGAGCTTTTCCTGCAACCTGTCGTATAAAGTCAGTGCAATAGCTGCTGTCAGTCACTGAATATCCAGAGATTTTACAGGACAGAGTCAAAAACCTGACCAGGCCTCAAGACAATAGAATCTGTCTGGGTCAGTTCAACACAGTGGACACGAGAGACAGACTGCAAGAAGCAGAAATAAGCAGA");
+        HashMap<String, String> expResult = new HashMap<>();
+        expResult.put("SRR099334.7", 
+                "GTGCGTTGCACTGAGACAAA");
+        expResult.put("SRR099334.10", 
+                "GTGCGTTCAGAGGCCAGACATCCAATAATTT");
         HashMap<String, String> result = instance.getSequences();
         assertEquals(expResult, result);
 
@@ -67,8 +70,9 @@ public class UploadBeanTest {
     public void testGetCount() {
         System.out.println("getCount");
         UploadBean instance = new UploadBean();
+        instance.setTesting(true);
         instance.setInput(input);
-        int expResult = 1;
+        int expResult = 2;
         int result = instance.getCount();
         assertEquals(expResult, result);
 
@@ -81,6 +85,7 @@ public class UploadBeanTest {
     public void testGetInput() {
         System.out.println("getInput");
         UploadBean instance = new UploadBean();
+        instance.setTesting(true);
         instance.setInput(input);
         String expResult = input;
         String result = instance.getInput();

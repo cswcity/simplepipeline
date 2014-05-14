@@ -19,9 +19,10 @@
                     <br />
                     <br />
                     <!--edit action for new display sequence -->
-                    <h:commandButton value="Upload" action="#{UploadBean.setInput(input.value)}"></h:commandButton>
+                    <h:commandButton value="Upload" 
+                                     action="#{UploadBean.setInput(input.value)}">
+                    </h:commandButton>
                  </h:form>
-                <h:link value="Continue" outcome="uploaded"></h:link>
                 <!--TODO add file browser for fasta format-->
             </ui:define>
 

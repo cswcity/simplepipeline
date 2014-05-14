@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package uk.co.waterdancer.simplepipeline;
 
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.HashMap;
-import javax.faces.bean.ManagedProperty;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -19,12 +22,12 @@ import javax.faces.bean.ManagedProperty;
 @Named(value = "UploadBean")
 @SessionScoped
 public class UploadBean implements Serializable {
-    
-    @ManagedProperty(value="#{input}")
+
     private String input;
     private HashMap<String, String> sequences;
-    @ManagedProperty(value="#{count}")
     private int count;
+    private boolean testing = false;
+
     /**
      * Creates a new instance of UploadBean
      */
@@ -33,41 +36,46 @@ public class UploadBean implements Serializable {
         //System.out.println("Upload bean created");
     }
 
+    public void setTesting(boolean testing) {
+        this.testing = testing;
+    }
+
     /**
      * @return the sequences
      */
     public HashMap<String, String> getSequences() {
-        if (sequences.isEmpty()){
+        if (sequences.isEmpty()) {
             fill();
         }
         return sequences;
     }
 
     /**
-     * private method to populate sequences hashmap
-     * with the input string.
+     * private method to populate sequences hashmap with the input string.
      */
     private void fill() {
-        String [] lines;
+        String[] lines;
         String id = "";
         String seq = "";
-        boolean sameSeq = false;
-        if (input != null){
+        if (input != null) {
             lines = input.split("\\n");
-            for (String line : lines){
-                if (line.startsWith(">") && !id.isEmpty()){
-                    System.out.println("id: "+id+"\nseq: "+ seq);
+            for (String line : lines) {
+                System.out.println("Line: " + line);
+                if (line.startsWith(">") && !id.isEmpty()) {
+                    System.out.println("In loop put: id="+id+" seq="+seq);
                     sequences.put(id, seq);
                     id = "";
                     seq = "";
-                }else if (line.startsWith(">")){
-                    System.out.println("in elif: " + line);
-                    id = line.substring(1);
-                }else {
+                }
+                if (line.startsWith(">")) {
+                    id = line.substring(1).trim();
+                    System.out.println("id after set: " + id);
+                } else {
                     seq = seq + line.trim();
                 }
             }
-            if (!(id.isEmpty() && seq.isEmpty())){
+            if (!(id.isEmpty() && seq.isEmpty())) {
+                System.out.println("Post loop put: id="+id+" seq="+seq);
                 sequences.put(id, seq);
             }
         }
@@ -80,7 +88,6 @@ public class UploadBean implements Serializable {
         count = sequences.size();
         return count;
     }
-    
 
     /**
      * @return the input
@@ -93,11 +100,24 @@ public class UploadBean implements Serializable {
      * @param input the input to set
      */
     public void setInput(String input) {
-        System.out.println("Input has been recognized: " + input);
+        //System.out.println("Input has been recognized: " + input);
         sequences.clear();
         this.input = input;
         fill();
-        
+        if (!testing){
+            redirect();
+        }
     }
     
+    private void redirect(){
+        String url = "uploaded.xhtml";
+        FacesContext fc = FacesContext.getCurrentInstance();
+        ExternalContext ec = fc.getExternalContext();
+        try {
+            ec.redirect(url);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
