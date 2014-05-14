@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-
+<h:head>
+      <title>Simple pipeline 4. midcode</title>		     
+   </h:head>
     <body>
 
         <ui:composition template="./shepherd_tplt.xhtml">
@@ -18,8 +20,11 @@
                 <p>
                     There are 151 barcode sequences held in the file MID.txt
                     in the Resources folder of the web application.
+                <h:outputText escape="false" value="#{MidProbeBean.count}"></h:outputText>
+                    sequences were trimmed.
                 </p>
                 <h:outputText escape="false" value="#{MidProbeBean.response}"></h:outputText>
+                <h:link value="Continue" outcome="fwdprimer" />
             </ui:define>
 
         </ui:composition>

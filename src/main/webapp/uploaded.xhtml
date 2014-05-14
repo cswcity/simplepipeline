@@ -1,14 +1,28 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+      <title>Simple pipeline 2.Upload Status</title>		     
+   </h:head>
     <body>
         <!--TODO Add results of upload (number of sequences)-->
         <ui:composition template="./shepherd_tplt.xhtml">
 
             <ui:define name="content">
-                content
+               
+                
+                <p>
+                    You have uploaded 
+                
+                <h:outputText escape="false" value="#{UploadBean.count}"></h:outputText>
+                 sequences.
+                </p>
+                
+                <h:link value="Continue" outcome="trimmed" />
+                    
+                    
             </ui:define>
 
         </ui:composition>
