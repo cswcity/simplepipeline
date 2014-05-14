@@ -1,14 +1,27 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+      <title>Simple pipeline 5. forward primer</title>		     
+   </h:head>
     <body>
         <!--TODO Add results alignment with fwd primer (number of sequences)-->
         <ui:composition template="./shepherd_tplt.xhtml">
 
             <ui:define name="content">
-                content
+                <p>
+                There are 
+                <h:outputText escape="false" value="#{FwdAlignBean.countNo}"></h:outputText>
+                 without forward primers which will be discarded.
+                 <br />
+                There are 
+                <h:outputText escape="false" value="#{FwdAlignBean.countYes}"></h:outputText>
+                 with forward primers which will be analysed.
+                </p>
+                
+            <h:button value="Continue" outcome="revprimer" />
             </ui:define>
 
         </ui:composition>

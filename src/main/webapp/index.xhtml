@@ -19,22 +19,18 @@
                     <br />
                     <br />
                     <!--edit action for new display sequence -->
-                    <h:commandButton value="Upload" 
+                    <h:commandButton value="Upload text" 
                                      action="#{UploadBean.setInput(input.value)}">
                     </h:commandButton>
                  </h:form>
-=======
-                    <h:commandButton value="Upload text" action="#{UploadBean.setInput(input.value)}"></h:commandButton>
-                 </h:form>
+
                 
                 <h:form>
                     <p>Or browse for a text file here:</p>
                     <h:inputFile></h:inputFile>
                     <h:commandButton value="Upload from file" action="#{UploadBean.setInput(input.value)}"></h:commandButton>
                 </h:form>
-<!--                <p>When you have uploaded click continue to proceed:</p> 
--->                
->>>>>>> 4c270191ea2b483755f10a71a86c023d3610e2b2
+
                 <!--TODO add file browser for fasta format-->
             </ui:define>
 

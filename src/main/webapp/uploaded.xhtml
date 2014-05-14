@@ -14,11 +14,13 @@
                
                 
                 <p>
-                    You have uploaded sequences:
+                    You have uploaded 
+                    <h:outputText escape="false" value="#{UploadBean.count}"></h:outputText>
+                     sequence(s):
                 </p>
-                <h:outputText escape="false" value="#{UploadBean.count}"></h:outputText>
                 
-                <h:link value="Continue" outcome="trimmed" />
+                
+                <h:button value="Continue" outcome="trimmed" />
                     
                     
             </ui:define>
