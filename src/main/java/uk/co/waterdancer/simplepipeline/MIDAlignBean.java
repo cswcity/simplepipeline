@@ -72,7 +72,7 @@ public class MIDAlignBean implements Serializable {
      * @param fasta the sequences with which to populate seqs
      */
     public void populate(String fasta){
-        //TODO add regex for populating the 
+        //#TODO add regex for populating the 
         //seqs HashMap from the fasta format
     }
     
