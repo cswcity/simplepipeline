@@ -10,40 +10,43 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import org.biojava3.core.sequence.DNASequence;
 
 /**
  *
  * @author charlie
  */
+@ManagedBean(name="UploadBean")
 @Named(value = "UploadBean")
 @SessionScoped
 public class UploadBean implements Serializable {
 
     private String input;
-    private HashMap<String, String> sequences;
+    private HashMap<String, DNASequence> sequences;
     private int count;
     private boolean testing = false;
+
 
     /**
      * Creates a new instance of UploadBean
      */
     public UploadBean() {
         sequences = new HashMap<>();
-        //System.out.println("Upload bean created");
+
     }
 
     public void setTesting(boolean testing) {
         this.testing = testing;
     }
+    
 
     /**
      * @return the sequences
      */
-    public HashMap<String, String> getSequences() {
+    public HashMap<String, DNASequence> getSequences() {
         if (sequences.isEmpty()) {
             fill();
         }
@@ -59,24 +62,20 @@ public class UploadBean implements Serializable {
         String seq = "";
         if (input != null) {
             lines = input.split("\\n");
-            for (String line : lines) {
-                System.out.println("Line: " + line);
+            for (String line : lines) {             
                 if (line.startsWith(">") && !id.isEmpty()) {
-                    System.out.println("In loop put: id="+id+" seq="+seq);
-                    sequences.put(id, seq);
+                    sequences.put(id, new DNASequence(seq));
                     id = "";
                     seq = "";
                 }
                 if (line.startsWith(">")) {
                     id = line.substring(1).trim();
-                    System.out.println("id after set: " + id);
                 } else {
                     seq = seq + line.trim();
                 }
             }
             if (!(id.isEmpty() && seq.isEmpty())) {
-                System.out.println("Post loop put: id="+id+" seq="+seq);
-                sequences.put(id, seq);
+                sequences.put(id, new DNASequence(seq));
             }
         }
     }
